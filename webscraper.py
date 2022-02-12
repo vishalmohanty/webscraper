@@ -4,7 +4,7 @@ from urllib.request import urlopen, Request
 from vm_ddgsearch import ddg
 from vm_googlesearch import search
 
-def get_bing_results(keyword, location, max_results=10):
+def get_bing_results(keyword, max_results=10):
     results = ddg(keyword, region='wt-wt', safesearch='Moderate', time='y', max_results=max_results)
     for result in results:
         print(result['href'])
