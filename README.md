@@ -1,4 +1,4 @@
-# vm_googlesearch
+# webscraper
 webscraper is a tool to search for queries across search engines and compute the bias of the search results.
 
 ## usage
