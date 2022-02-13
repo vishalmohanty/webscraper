@@ -1,3 +1,9 @@
 vm_googlesearch==1.0
 vm_ddgsearch==1.0
 urllib3==1.26.5
+microsoft-bing-websearch
+microsoft-bing-customwebsearch
+msrest
+azure-common
+msrestazure
+azure-core
