@@ -15,11 +15,11 @@ def get_google_results(keyword, location, max_results=10):
     for result in g_results:
         print(result)
 
-def get_bing_results(keyword):
+def get_bing_results(keyword, mkt='en-US'):
     make_bing_query(keyword)
 
 
 keyword = 'pizza'
-get_ddg_results(keyword=keyword)
-get_google_results(keyword=keyword, location="Boston,Massachusetts,United States")
-get_bing_results(keyword=keyword)
+# get_ddg_results(keyword=keyword)
+# get_google_results(keyword=keyword, location="Boston,Massachusetts,United States")
+get_bing_results(keyword=keyword, mkt='en-UK')

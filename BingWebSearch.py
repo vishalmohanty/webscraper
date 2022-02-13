@@ -7,14 +7,14 @@ import requests
 Module for bing search
 '''
 
-def make_bing_query(query):
+def make_bing_query(query, mkt = 'en-US'):
     # Add API key and endpoint from environment variables
     subscription_key = os.environ['BING_SEARCH_V7_SUBSCRIPTION_KEY']
     endpoint = os.environ['BING_SEARCH_V7_ENDPOINT'] + "/v7.0/search"
 
     # Construct request
-    mkt = 'en-US'
-    params = {'q': query, 'mkt': mkt}
+    view = '47.6421,-122.13715,5000'
+    params = {'q': query, 'mkt': mkt, 'localCircularView': view }
     headers = {'Ocp-Apim-Subscription-Key': subscription_key }
 
     # call API
