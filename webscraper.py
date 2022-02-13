@@ -20,6 +20,6 @@ def get_bing_results(keyword, mkt='en-US'):
 
 
 keyword = 'pizza'
-# get_ddg_results(keyword=keyword)
-# get_google_results(keyword=keyword, location="Boston,Massachusetts,United States")
-get_bing_results(keyword=keyword, mkt='en-UK')
+get_ddg_results(keyword=keyword)
+get_google_results(keyword=keyword, location="Boston,Massachusetts,United States")
+get_bing_results(keyword=keyword)
