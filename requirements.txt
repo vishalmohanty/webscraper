@@ -7,4 +7,5 @@ msrest
 azure-common
 msrestazure
 azure-core
+geopy
 WebSearcher

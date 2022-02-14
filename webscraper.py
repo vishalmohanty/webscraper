@@ -54,8 +54,8 @@ def get_cumulative_bias(websites, bias_scores, weighted=False):
     return -1
 
 
-def get_bing_results(keyword):
-    make_bing_query(keyword)
+def get_bing_results(keyword, mkt='en-US', location='New York, NY'):
+    make_bing_query(keyword, mkt, location)
 
 def main():
     scores = load_website_scores()
@@ -67,5 +67,12 @@ def main():
     get_ddg_results(keyword=keyword)
     get_bing_results(keyword=keyword)
 
+
+keyword = 'pizza'
+get_ddg_results(keyword=keyword)
+get_google_results(keyword=keyword, location="Boston,Massachusetts,United States")
+get_bing_results(keyword=keyword, mkt='en-US', location='Boston, MA')
+
 if __name__=="__main__":
     main()
+
