@@ -42,10 +42,20 @@ def make_bing_query(query, mkt = 'en-US', location = "Columbus, OH"):
         response = requests.get(endpoint, headers=headers, params=params)
         response.raise_for_status()
 
-        print("\nResponse Headers:\n")
-        print(response.headers)
+        # print("\nResponse Headers:\n")
+        # print(response.headers)
 
-        print("\nJSON Response:\n")
-        pprint(response.json())
+        # print("\nJSON Response:\n")
+        # pprint(response.json())
+        return response.json()
     except Exception as ex:
         raise ex
+
+
+def get_urls_from_query(bing_results_json):
+    urls = []
+    for search_type in bing_results_json:
+        if search_type == 'webPages':
+            for result in bing_results_json[search_type]['value']:
+                urls.append(result['url'])
+
