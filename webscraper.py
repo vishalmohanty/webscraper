@@ -83,6 +83,7 @@ def get_overall_google_bias(keywords, locations, bias_scores, weighted=False, ma
                 weighted=weighted
                 )
         location_to_bias[location] = bias/len(keyword_to_websites)
+        print("Bias for %s: %f" % (location, location_to_bias[location]))
     return location_to_bias
 
 def get_canonical_names(csv_file):
@@ -107,7 +108,12 @@ def main():
 
     keywords = get_keywords("data/keywords/keywords.csv")
     locations = get_canonical_names("data/location_data/state_capitals.csv")
-    location_to_bias = get_overall_google_bias(keywords=keywords, locations=locations, bias_scores=scores, weighted=True)
+    location_to_bias = get_overall_google_bias(
+        keywords=keywords, 
+        locations=locations, 
+        bias_scores=scores, 
+        weighted=True,
+        max_results=10)
     print(location_to_bias)
 
 if __name__=="__main__":
