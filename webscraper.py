@@ -57,12 +57,15 @@ def get_google_results(keyword, location, max_results=10):
 def get_bing_results(keyword, mkt='en-US', location='New York, NY'):
     make_bing_query(keyword, mkt, location)
 
+def get_sites_from_bing_json(bing_json):
+
+
 def google_keywords_search(keywords, location, max_results=10):
     keyword_to_websites = {}
     for keyword in keywords:
         keyword_to_websites[keyword] = get_google_results(
-            keyword=keyword, 
-            location=location, 
+            keyword=keyword,
+            location=location,
             max_results=max_results
             )
     return keyword_to_websites
@@ -109,9 +112,9 @@ def main():
     keywords = get_keywords("data/keywords/keywords.csv")
     locations = get_canonical_names("data/location_data/state_capitals.csv")
     location_to_bias = get_overall_google_bias(
-        keywords=keywords, 
-        locations=locations, 
-        bias_scores=scores, 
+        keywords=keywords,
+        locations=locations,
+        bias_scores=scores,
         weighted=True,
         max_results=10)
     print(location_to_bias)
