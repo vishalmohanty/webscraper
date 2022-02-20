@@ -1,4 +1,6 @@
 import csv
+import sys
+from urllib.parse import urlparse
 from vm_ddgsearch import ddg
 from vm_googlesearch import search
 from util import get_cumulative_bias, get_keywords, get_canonical_names, get_bing_locations
@@ -27,6 +29,12 @@ def get_google_results(keyword, location, max_results=10):
     for result in g_results:
         print(result)
     return g_results
+
+
+def get_bing_results(keyword, mkt='en-US', location='New York, NY'):
+    make_bing_query(keyword, mkt, location)
+
+#def get_sites_from_bing_json(bing_json):
 
 
 def google_keywords_search(keywords, location, max_results=10):
@@ -60,6 +68,13 @@ def get_overall_google_bias(keywords, locations, bias_scores, weighted=False, ma
     return location_to_bias
 
 
+def get_location_file_from_input():
+    if len(sys.argv) > 1:
+        location_file = sys.argv[1]
+    else:
+        location_file = "data/location_data/state_capitals.csv"
+    return location_file
+
 def main():
     scores = load_website_scores()
     keywords = get_keywords("data/keywords/keywords.csv")
@@ -70,6 +85,15 @@ def main():
 
     # get_ddg_results(keyword=keyword)
     # get_bing_results(keyword=keyword)
+
+
+    locations_path = get_location_file_from_input()
+
+    # print(locations_path)
+
+    keywords = get_keywords("data/keywords/keywords.csv")
+    locations = get_canonical_names(locations_path)
+    location_to_bias = get_overall_google_bias(
 
 
     # google_locations = get_canonical_names("data/location_data/state_capitals.csv")
