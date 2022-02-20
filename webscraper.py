@@ -119,17 +119,17 @@ def main():
 
     locations_path = get_location_file_from_input()
 
-    print(locations_path)
+    # print(locations_path)
 
-    #  keywords = get_keywords("data/keywords/keywords.csv")
-    #  locations = get_canonical_names(locations_path)
-    #  location_to_bias = get_overall_google_bias(
-    #      keywords=keywords,
-    #      locations=locations,
-    #      bias_scores=scores,
-    #      weighted=True,
-    #      max_results=10)
-    #  print(location_to_bias)
+    keywords = get_keywords("data/keywords/keywords.csv")
+    locations = get_canonical_names(locations_path)
+    location_to_bias = get_overall_google_bias(
+        keywords=keywords,
+        locations=locations,
+        bias_scores=scores,
+        weighted=True,
+        max_results=10)
+    print(location_to_bias)
 
 if __name__=="__main__":
     main()
