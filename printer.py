@@ -1,6 +1,6 @@
+import matplotlib.lines as mlines
 import matplotlib.pylab as plt
 from matplotlib import rcParams
-import matplotlib.lines as mlines
 
 rcParams['font.family'] = 'Times New Roman'
 
@@ -107,6 +107,68 @@ unweighted = {
     'WY': -0.089318
 }
 
+google_weighted = {
+    'Montgomery,Alabama': -0.052620,
+    'Juneau,Juneau,Alaska': -0.051601,
+    'Phoenix,Arizona': -0.055961,
+    'Little Rock,Arkansas': -0.052230,
+    'Sacramento,California': -0.057171,
+    'Denver,Colorado': -0.057646,
+    'Hartford,Connecticut': -0.055862,
+    'Dover,Delaware': -0.057227,
+    'Tallahassee,Florida': -0.052155022000576014,
+    'Atlanta,Georgia': -0.05557964076252149,
+    'Honolulu,Hawaii': -0.05468414854474025,
+    'Boise,Idaho': -0.053364660804897476,
+    'Springfield,Illinois': -0.0525578252727048,
+    'Indianapolis,Indiana': -0.050825842137306974,
+    'Des Moines,New Mexico': -0.04908492404672618,
+    'Topeka,Indiana': -0.04693345961806908,
+    'Frankfort,Kansas': -0.05178464198623083,
+    'Baton Rouge,Louisiana': -0.05996784543835305,
+    'Augusta,Maine': -0.05777312624740943,
+    'Annapolis,Missouri': -0.06305408946402166,
+    'Boston,Massachusetts': -0.05599401243072362,
+    'Lansing,Michigan': -0.05363612221065318,
+    'Saint Paul,Minnesota': -0.05483828005945487,
+    'Jackson,Missouri': -0.05363580468681736,
+    'Jefferson City,Missouri': -0.057585290175204626,
+    'Helena,Montana': -0.05282379169593389,
+    'Lincoln,Montana': -0.05518281865916025,
+    'Carson City,Nevada': -0.057819502850532285,
+    'Concord,New Hampshire': -0.056172768550330716,
+    'Trenton,New Jersey': -0.050565,
+    'Santa Fe,New Mexico': -0.054469,
+    'Albany,New York': -0.056666,
+    'Raleigh,North Carolina': -0.057353,
+    'Columbus,Ohio': -0.053442,
+    'Oklahoma City,Oklahoma': -0.056267,
+    'Salem,Oregon': -0.053718,
+    'Harrisburg,Pennsylvania': -0.055401,
+    'Columbia,South Carolina': -0.054451,
+    'Pierre,South Dakota': -0.052940,
+    'Nashville,Tennessee': -0.055467,
+    'Austin,Texas': -0.057399,
+    'Montpelier,Vermont': -0.057246,
+    'Richmond County,Virginia': -0.055788,
+    'Olympia,Washington': -0.058078,
+    'Charleston,West Virginia': -0.056183,
+    'Cheyenne,Wyoming': -0.051547,
+    'Bismarck,North Dakota': -0.053327,
+    'Salt Lake City,Utah': -0.049546,
+    'Madison,Wisconsin': -0.052086
+}
+
+google_weighted_keys = list(google_weighted.keys())
+counter = 1
+for old_key in google_weighted_keys:
+    print(old_key)
+    google_weighted[counter] = google_weighted[old_key]
+    google_weighted.pop(old_key, None)
+    counter += 1
+lists = sorted(google_weighted.items())
+google_x, google_y = zip(*lists)
+
 four_am_weighted = {'Montgomery, AL': -0.04106160563522392, 'Juneau, AK': -0.04064849660680458, 'Phoenix, AZ': -0.04265279814978116, 'Little Rock, AR': -0.03930308863192053, 'Sacramento, CA': -0.040419826241333286, 'Denver, CO': -0.03904982615326652, 'Hartford, CT': -0.035606543448998246, 'Dover, DE': -0.04090555998222333, 'Tallahassee, FL': -0.050915518569258966, 'Atlanta, GA': -0.049727090576971514, 'Honolulu, HI': -0.04783970951436129, 'Boise, ID': -0.035020529725744896, 'Springfield, IL': -0.03746684172767187, 'Indianapolis, IN': -0.04756033710095835, 'Des Moines, IA': -0.034563683837355245, 'Topeka, KS': -0.04550256955292404, 'Frankfort, KY': -0.038019192506392144, 'Baton Rouge, LA': -0.053615543995478854, 'Augusta, ME': -0.03942428338139096, 'Annapolis, MD': -0.03439317053285649, 'Boston, MA': -0.031500983803294975, 'Lansing, MI': -0.04350563944003527, 'St. Paul, MN': -0.046485900079785, 'Jackson, MS': -0.04553522749514757, 'Jefferson City, MO': -0.046350631481364826, 'Helena, MT': -0.04677409953353769, 'Lincoln, NE': -0.044588639757308965, 'Carson City, NV': -0.04534741177225348, 'Concord, NH': -0.03931576946625701, 'Trenton, NJ': -0.050834531983403784, 'Santa Fe, NM': -0.040076032039976485, 'Albany, NY': -0.05177463857044876, 'Raleigh, NC': -0.042098743463228915, 'Bismarck, ND': -0.04537421959771563, 'Oklahoma City, OH': -0.05003428665152617, 'Salem, OR': -0.047811487222152234, 'Harrisburg, PA': -0.04427963014170003, 'Providence, RI': -0.047955175091332826, 'Columbia, SC': -0.04848707708409153, 'Pierre, SD': -0.03970123649428907, 'Nashville, TN': -0.041485485981635456, 'Austin, TX': -0.045247370591412144, 'Salt Lake City, UT': -0.03710654358663904, 'Montpelier, VT': -0.04443400320248127, 'Richmond, VA': -0.04212392927304667, 'Olympia, WA': -0.05046484392817484, 'Charleston, WV': -0.05307760559381502, 'Madison, WI': -0.044838417680892646, 'Cheyenne, WY': -0.03900113811728395}
 
 
@@ -131,7 +193,7 @@ for old_key in weighted_keys:
 
 for key in weighted_keys:
     if key[-2:] not in unweighted_keys:
-        print("*** found: %s" % key)
+        print("*found: %s" % key)
 
 lists1 = sorted(weighted.items())
 x1, y1 = zip(*lists1)
@@ -146,16 +208,16 @@ for old_key in weighted_keys:
 
 for key in weighted_keys:
     if key[-2:] not in unweighted_keys:
-        print("*** found: %s" % key)
+        print("*found: %s" % key)
 
 lists2 = sorted(four_am_weighted.items())
 x2, y2 = zip(*lists2)
 
 plt.xticks(rotation=90)
-plt.ylim([-0.06, 0.02])
+plt.ylim([-0.07, 0.01])
 plt.axhline(y=0.0, color='grey', linestyle=':')
 plt.xlabel("States")
-plt.ylabel("Bing Search Bias")
+plt.ylabel("Search Engine Bias")
 
 
 def newline(p1, p2, color='skyblue'):
@@ -167,25 +229,23 @@ def newline(p1, p2, color='skyblue'):
     return l
 
 
-fig, ax = plt.subplots(1,1,figsize=(14,14))
-ax.scatter(y=y1, x=x1, s=50, color='blue', alpha=0.7, label='8pm')
-ax.scatter(y=y2, x=x1, s=50, color='red', alpha=0.7, label='4am')
-ax.set_ylim([-0.06, -0.02])
-ax.set_xlabel('States')
-ax.set_ylabel('Bing Search Bias')
+# fig, ax = plt.subplots(1,1,figsize=(14,14))
+# ax.scatter(y=y1, x=x1, s=50, color='blue', alpha=0.7, label='8pm')
+# ax.scatter(y=y2, x=x1, s=50, color='red', alpha=0.7, label='4am')
+# ax.set_ylim([-0.06, -0.02])
+# ax.set_xlabel('States')
+# ax.set_ylabel('Bing Search Bias')
+# ax.legend()
+# # Line Segments
+# for i, p1, p2 in zip(x1, y1, y2):
+#     newline([i, p1], [i, p2])
 
-ax.legend()
-# Line Segments
-for i, p1, p2 in zip(x1, y1, y2):
-    newline([i, p1], [i, p2])
-
-# ax.show()
 # plt.plot(x, y, color='red', marker='^', markerfacecolor='none', linestyle = '',
 #          label='Unweighted')
-# plt.plot(x, y1, color='blue', marker='^', markerfacecolor='none', linestyle = '',
-#          label='8pm')
-# plt.plot(x, y2, color='orange', marker='^', markerfacecolor='none', linestyle = '',
-#          label='4am')
-# plt.legend()
+plt.plot(x, y1, color='blue', marker='^', markerfacecolor='none', linestyle = '',
+         label='Bing')
+plt.plot(x, google_y, color='orange', marker='^', markerfacecolor='none', linestyle='',
+         label='Google')
+plt.legend(loc="upper right")
 # zip joins x and y coordinates in pairs
 plt.show()
