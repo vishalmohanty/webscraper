@@ -5,6 +5,8 @@ from vm_ddgsearch import ddg
 from vm_googlesearch import search
 from util import get_cumulative_bias, get_keywords, get_canonical_names, get_bing_locations
 from BingWebSearch import bing_search, get_overall_bing_bias
+from GoogleWebSearch import get_google_auto_complete_suggestions, \
+    get_google_auto_complete_suggestions_bias, get_full_word_google_auto_complete_suggestions_bias
 import pandas as pd
 
 
@@ -31,8 +33,8 @@ def get_google_results(keyword, location, max_results=10):
     return g_results
 
 
-def get_bing_results(keyword, mkt='en-US', location='New York, NY'):
-    make_bing_query(keyword, mkt, location)
+# def get_bing_results(keyword, mkt='en-US', location='New York, NY'):
+#     make_bing_query(keyword, mkt, location)
 
 #def get_sites_from_bing_json(bing_json):
 
@@ -75,45 +77,27 @@ def get_location_file_from_input():
         location_file = "data/location_data/state_capitals.csv"
     return location_file
 
+
 def main():
     scores = load_website_scores()
     keywords = get_keywords("data/keywords/keywords.csv")
     keyword = 'us president'
-
-    # google_results = get_google_results(keyword=keyword, location="Boston,Massachusetts,United States", max_results=20)
-    # print("Cumulative bias: %s" % get_cumulative_bias(google_results, scores, weighted=True))
-
-    # get_ddg_results(keyword=keyword)
-    # get_bing_results(keyword=keyword)
-
-
     locations_path = get_location_file_from_input()
-
-    # print(locations_path)
-
     keywords = get_keywords("data/keywords/keywords.csv")
     locations = get_canonical_names(locations_path)
-    location_to_bias = get_overall_google_bias(
-
-
-    # google_locations = get_canonical_names("data/location_data/state_capitals.csv")
     bing_locations = get_bing_locations("data/location_data/bing_capitals.csv")
-    # location_to_bias = get_overall_google_bias(
+
+    # bing_location_to_bias = get_overall_bing_bias(
     #     keywords=keywords,
-    #     locations=locations,
+    #     locations=bing_locations,
     #     bias_scores=scores,
     #     weighted=True,
-    #     max_results=10)
-    # print(location_to_bias)
+    #     max_results=10
+    # )
+    # print(bing_location_to_bias)
 
-    bing_location_to_bias = get_overall_bing_bias(
-        keywords=keywords,
-        locations=bing_locations,
-        bias_scores=scores,
-        weighted=True,
-        max_results=10
-    )
-    print(bing_location_to_bias)
+    print(get_full_word_google_auto_complete_suggestions_bias(
+        keyword="US Election Democratic"))
 
 
 if __name__ == "__main__":
