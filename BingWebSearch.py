@@ -9,12 +9,44 @@ import requests
 from geopy.geocoders import Nominatim
 from util import get_cumulative_bias
 
+BING_AUTOSUGGEST_ENDPOINT = 'https://api.bing.microsoft.com/v7.0/suggestions'
 
 def get_location(location="Columbus, OH"):
     geolocator = Nominatim(user_agent="CS356-proj")
     geolocation = geolocator.geocode(location)
     return geolocation
 
+
+def make_bing_autosuggest_query(query, location="Columbus, OH"):
+    '''
+    returns a JSON object representing autosuggestions given a query keyword.
+    '''
+    subscription_key = os.environ['BING_SEARCH_V7_SUBSCRIPTION_KEY']
+    geolocation = get_location(location)
+    search_location =  f"lat:{geolocation.latitude};long:{geolocation.longitude};re:5000"
+    endpoint = BING_AUTOSUGGEST_ENDPOINT
+
+    params = {
+        'q' : query,
+    }
+
+    headers = {
+        'Ocp-Apim-Subscription-Key': subscription_key,
+        'X-Search-Location': search_location,
+    }
+
+    try:
+        response = requests.get(endpoint, headers=headers, params=params)
+        response.raise_for_status()
+
+        print("\nResponse Headers:\n")
+        print(response.headers)
+
+        print("\nJSON Response:\n")
+        pprint(response.json())
+        return response.json()
+    except Exception as ex:
+        raise ex
 
 def make_bing_query(query, location="Columbus, OH", max_results=10):
     # Add API key and endpoint from environment variables
@@ -53,6 +85,15 @@ def make_bing_query(query, location="Columbus, OH", max_results=10):
     except Exception as ex:
         raise ex
 
+def get_queries_from_autosuggest(bing_autosuggest_results_json):
+    '''
+    Returns an array of search queries from an autosuggest JSON result
+    '''
+    queries = []
+    results = bing_autosuggest_results_json['suggestionGroups'][0]['searchSuggestions']
+    for suggestion in results:
+        queries.append(suggestion['query'])
+    print(queries)
 
 def get_urls_from_query(bing_results_json):
     urls = []
@@ -112,3 +153,12 @@ def get_overall_bing_bias(keywords, locations, bias_scores, weighted=False, max_
         location_to_bias[location] = bias / len(keyword_to_websites)
         print("Bias for %s: %f" % (location, location_to_bias[location]))
     return location_to_bias
+
+def main():
+    results_json = make_bing_autosuggest_query('pizza')
+    print(results_json)
+    queries = get_queries_from_autosuggest(results_json)
+    print(queries)
+
+if __name__ == '__main__':
+    main()

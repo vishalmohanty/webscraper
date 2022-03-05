@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from vm_ddgsearch import ddg
 from vm_googlesearch import search
 from util import get_cumulative_bias, get_keywords, get_canonical_names, get_bing_locations
-from BingWebSearch import bing_search, get_overall_bing_bias
+from BingWebSearch import make_bing_autosuggest_query, bing_search, get_overall_bing_bias
 from GoogleWebSearch import get_google_auto_complete_suggestions, \
     get_google_auto_complete_suggestions_bias, get_full_word_google_auto_complete_suggestions_bias
 import pandas as pd
@@ -79,13 +79,13 @@ def get_location_file_from_input():
 
 
 def main():
-    scores = load_website_scores()
-    keywords = get_keywords("data/keywords/keywords.csv")
-    keyword = 'us president'
-    locations_path = get_location_file_from_input()
-    keywords = get_keywords("data/keywords/keywords.csv")
-    locations = get_canonical_names(locations_path)
-    bing_locations = get_bing_locations("data/location_data/bing_capitals.csv")
+    # scores = load_website_scores()
+    # keywords = get_keywords("data/keywords/keywords.csv")
+    # keyword = 'us president'
+    # locations_path = get_location_file_from_input()
+    # keywords = get_keywords("data/keywords/keywords.csv")
+    # locations = get_canonical_names(locations_path)
+    # bing_locations = get_bing_locations("data/location_data/bing_capitals.csv")
 
     # bing_location_to_bias = get_overall_bing_bias(
     #     keywords=keywords,
@@ -96,8 +96,9 @@ def main():
     # )
     # print(bing_location_to_bias)
 
-    print(get_full_word_google_auto_complete_suggestions_bias(
-        keyword="US Election Democratic"))
+    #print(get_full_word_google_auto_complete_suggestions_bias(
+    #    keyword="US Election Democratic"))
+    print(make_bing_autosuggest_query('pizza', location="San Francisco, CA"))
 
 
 if __name__ == "__main__":

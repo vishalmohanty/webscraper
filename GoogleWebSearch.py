@@ -96,14 +96,14 @@ def get_google_auto_complete_suggestions_bias(
     n_suggestions = len(suggestions)
     # Log the suggestions so that they can be used later if required
     print(suggestions)
-    
+
     unweighted_democratic_count = 0
     weighted_democratic_count = 0.0
     democratic_relevance = 0
     unweighted_republican_count = 0
     weighted_republican_count = 0.0
     republican_relevance = 0
-    
+
     for i in range(0, n_suggestions):
         if "democratic" in suggestions[i][0]:
             unweighted_democratic_count = unweighted_democratic_count + 1
