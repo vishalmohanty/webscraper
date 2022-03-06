@@ -26,6 +26,7 @@ def make_bing_autosuggest_query(query, location="Columbus, OH"):
     geolocation = get_location(location)
     search_location =  f"lat:{geolocation.latitude};long:{geolocation.longitude};re:5000"
     endpoint = BING_AUTOSUGGEST_ENDPOINT
+    print(f"Getting autosuggestions for {query} from location: {location}")
 
     params = {
         'q' : query,
@@ -61,6 +62,7 @@ def make_bing_query(query, location="Columbus, OH", max_results=10):
     # search_location = 'lat:39.9612;long:82.9988;re:5000;disp:Columbus%2C%20Ohio'
     geolocation = get_location(location)
     search_location = f"lat:{geolocation.latitude};long:{geolocation.longitude};re:5000"
+    print(f"Searching from location {location}")
 
     params = {
         'q': query,
@@ -180,6 +182,7 @@ def get_overall_bing_bias_autosuggest(keywords, locations, bias_scores, weighted
                 )
             location_to_bias[location] = bias / len(keyword_to_websites)
         print(f"Bias for {location}: {location_to_bias[location]}")
+
     return location_to_bias
 
 
