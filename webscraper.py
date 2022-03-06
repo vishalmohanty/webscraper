@@ -4,7 +4,8 @@ from urllib.parse import urlparse
 from vm_ddgsearch import ddg
 from vm_googlesearch import search
 from util import get_cumulative_bias, get_keywords, get_canonical_names, get_bing_locations
-from BingWebSearch import make_bing_autosuggest_query, bing_search, get_overall_bing_bias
+from BingWebSearch import make_bing_autosuggest_query, bing_search, get_overall_bing_bias, \
+    get_overall_bing_bias_autosuggest
 from GoogleWebSearch import get_google_auto_complete_suggestions, \
     get_google_auto_complete_suggestions_bias, get_full_word_google_auto_complete_suggestions_bias
 import pandas as pd
