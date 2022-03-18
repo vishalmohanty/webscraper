@@ -7,7 +7,8 @@ from util import get_cumulative_bias, get_keywords, get_canonical_names, get_bin
 from BingWebSearch import make_bing_autosuggest_query, bing_search, get_overall_bing_bias, \
     get_overall_bing_bias_autosuggest
 from GoogleWebSearch import get_google_auto_complete_suggestions, \
-    get_google_auto_complete_suggestions_bias, get_full_word_google_auto_complete_suggestions_bias
+    get_google_auto_complete_suggestions_bias, \
+    get_full_word_google_auto_complete_suggestions_bias, get_overall_google_suggestions_bias
 import pandas as pd
 
 
@@ -87,6 +88,14 @@ def main():
     # keywords = get_keywords("data/keywords/keywords.csv")
     # locations = get_canonical_names(locations_path)
     # bing_locations = get_bing_locations("data/location_data/bing_capitals.csv")
+    scores = load_website_scores()
+    keywords = get_keywords("data/keywords/keywords.csv")
+    keyword = 'us president'
+    locations_path = get_location_file_from_input()
+    keywords = get_keywords("data/keywords/keywords.csv")
+    auto_complete_keywords = get_keywords("data/keywords/auto_complete_keywords.csv")
+    locations = get_canonical_names(locations_path)
+    bing_locations = get_bing_locations("data/location_data/bing_capitals.csv")
 
     # bing_location_to_bias = get_overall_bing_bias(
     #     keywords=keywords,
@@ -100,6 +109,11 @@ def main():
     #print(get_full_word_google_auto_complete_suggestions_bias(
     #    keyword="US Election Democratic"))
     print(make_bing_autosuggest_query('pizza', location="San Francisco, CA"))
+    # print(get_full_word_google_auto_complete_suggestions_bias(
+    #     keyword="US Political Party Democratic"))
+    # print(get_overall_google_suggestions_bias(auto_complete_keywords))
+    print(get_overall_google_suggestions_bias(["US Political Party Democratic",
+                                               "US Political Party Republican"]))
 
 
 if __name__ == "__main__":

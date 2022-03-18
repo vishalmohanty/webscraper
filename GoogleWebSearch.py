@@ -121,8 +121,11 @@ def get_google_auto_complete_suggestions_bias(
     print("Weighted republican count: %f" % weighted_republican_count)
     print("Total democratic relevance: %d" % democratic_relevance)
     print("Total republican relevance: %d" % republican_relevance)
-    avg_democratic_relevance = (democratic_relevance*1.0/n_suggestions)
-    avg_republican_relevance = (republican_relevance*1.0/n_suggestions)
+    avg_democratic_relevance = 0.0
+    avg_republican_relevance = 0.0
+    if n_suggestions > 0:
+        avg_democratic_relevance = (democratic_relevance*1.0/n_suggestions)
+        avg_republican_relevance = (republican_relevance*1.0/n_suggestions)
     print("Average democratic relevance: %f" % avg_democratic_relevance)
     print("Average republican relevance: %f" % avg_republican_relevance)
     print("\n")
@@ -145,4 +148,20 @@ def get_full_word_google_auto_complete_suggestions_bias(
             location=location,
             language_code=language_code
         )
-    print(search_term_to_scores)
+    return search_term_to_scores
+
+
+def get_overall_google_suggestions_bias(
+        keywords,
+        location="Boston,Massachusetts,United States",
+        language_code="en"
+):
+    overall_suggestions = []
+    for keyword in keywords:
+        cur_suggestions = get_full_word_google_auto_complete_suggestions_bias(
+            keyword=keyword,
+            location=location,
+            language_code=language_code
+        )
+        overall_suggestions.append(cur_suggestions)
+    return overall_suggestions
