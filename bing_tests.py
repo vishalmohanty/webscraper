@@ -23,13 +23,18 @@ def load_website_scores():
 # pprint(results_json)
 # queries = get_queries_from_autosuggest(results_json)
 # print(queries)
-keywords = "data/keywords/test_keywords.csv"
-get_overall_bing_bias_autosuggest(
-	keywords = get_keywords(keywords),
-	locations = get_bing_locations("data/location_data/bing_test.csv"),
-	bias_scores = load_website_scores(),
-	weighted=True,
-	max_results=10
+keywords = "data/keywords/keywords2.csv"
+# get_overall_bing_bias_autosuggest(
+#	keywords = get_keywords(keywords),
+#	locations = get_bing_locations("data/location_data/bing_capitals.csv"),
+#	bias_scores = load_website_scores(),
+#	weighted=True,
+#	max_results=10
+#)
+
+get_auto_complete_biases(
+    get_bing_locations("data/location_data/bing_capitals.csv"),
+    get_keywords(keywords)
 )
 
 # pprint(bing_results_json)
